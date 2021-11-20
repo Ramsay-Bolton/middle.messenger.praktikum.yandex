@@ -1,0 +1,108 @@
+.main {
+    height: 100%;
+    display: flex;
+    flex-direction: row;
+    align-items: flex-start;
+    padding: 0px;
+    
+}
+.section {
+    position: static;
+    width: 100%;
+    left: 104px;
+    top: 0px;
+
+}
+.sidebar {
+	display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+    padding: 12px;
+    position: absolute;
+    width: 104px;
+    max-height: 1080px;
+    left: 0px;
+    top: 0px;
+    bottom: 0px;
+    background: rgba(255, 255, 255, 0.5);
+}
+.sidebar__menu {
+    position: static;
+    width: 80px;
+    height: 80px;
+    left: 12px;
+    top: 12px;
+    border-radius: 40px;
+    overflow: hidden;
+}
+.sidebar__back {
+    position: static;
+    width: 80px;
+    height: 80px;
+    left: 12px;
+    top: 932px;
+}
+.profile {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 0px;
+}
+.profile__avatar {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 38px 44px;
+}
+.profile__info {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 12px 20px 0px;
+    width: 400px;
+    
+}
+.profile__info__item {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: baseline;
+    padding: 0px;
+    width: 100%;
+}
+.profile__info__item input{
+    background: rgba(255, 255, 255, 0.5);
+    border-width: 1px;
+    border-style: solid;
+    border-color: #72726f;
+    height: 40px;
+    border-radius: 8px;
+}
+.profile__info__item label{
+    font-size: medium;
+}
+.profile__avatar-image {
+    border-radius: 100px;
+    overflow: hidden;
+    cursor: pointer;
+}
+.profile__avatar-name {
+    font-style: normal;
+    font-weight: bold;
+    font-size: 24px;
+    line-height: 28px;
+    text-align: center;
+}
+.profile__save-button {background-color: #F9EF12;
+    color: #000000;
+    height: 40px;
+    border-radius: 8px;
+    width: 100px;
+    cursor: pointer;
+}
+.profile__profile__avatar-image__change {
+    position: static;
+    width: 50px;
+    height: 50px;    
+}

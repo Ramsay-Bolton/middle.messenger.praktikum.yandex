@@ -1,0 +1,18 @@
+html{
+    box-sizing: border-box;
+}
+*, *::before, *::after{
+    box-sizing: inherit;
+}
+
+body{
+    background: linear-gradient(0.25turn, #000000, #ebf8e1, #F9EF12);;
+    max-height: 1080px;
+
+
+}
+
+:root {
+    --font-main: 'Roboto', sans-serif;
+    --font-logo: 'Roboto Slab', serif;
+}
