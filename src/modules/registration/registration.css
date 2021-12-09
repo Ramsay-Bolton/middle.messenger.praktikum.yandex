@@ -1,0 +1,29 @@
+.registration {
+    position: absolute;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    top: 40%;
+    left: 50%;
+    transform: translate(-50%, -50%)
+}
+.registration input {
+    background: rgba(255, 255, 255, 0.5);
+    border-width: 1px;
+    border-style: solid;
+    border-color: #72726f;
+    height: 40px;
+    border-radius: 8px;
+}
+.registration__button {
+    background-color: #F9EF12;
+    color: #000000;
+    height: 40px;
+    border-radius: 8px;
+    width: 100px;
+}
+.registration__signin-link {
+    color: #000000;
+    text-decoration: underline dotted black 2px;
+}
