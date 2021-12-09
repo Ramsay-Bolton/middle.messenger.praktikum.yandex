@@ -1,7 +1,7 @@
 import "./default.css";
 import sidebarLogoImage from "../../../static/images/logo.png"
 import sidebarBackImage from "../../../static/images/arrow-back.png"
-import Handlebars from 'handlebars/dist/handlebars';
+import Handlebars from "handlebars/dist/handlebars";
 import { defaultTemplate } from "./default.tmpl";
 
 const data = { 
@@ -31,5 +31,6 @@ const data = {
 document.addEventListener('DOMContentLoaded', () => {
     const defaultPage = Handlebars.compile(defaultTemplate);
     const html = defaultPage(data);
-  document.body.innerHTML = html;
+    const app = document.querySelector("#app");
+    app.innerHTML = html;
 })

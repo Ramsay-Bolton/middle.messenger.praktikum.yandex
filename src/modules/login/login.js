@@ -1,5 +1,5 @@
 import "./login.css";
-import Handlebars from 'handlebars/dist/handlebars';
+import Handlebars from "handlebars/dist/handlebars";
 import { loginTemplate } from "./login.tmpl";
 
 const data = {
@@ -17,5 +17,6 @@ const data = {
 document.addEventListener('DOMContentLoaded', () => {
     const loginPage = Handlebars.compile(loginTemplate);
     const html = loginPage(data);
-  document.body.innerHTML = html;
+    const app = document.querySelector("#app");
+    app.innerHTML = html;
 })

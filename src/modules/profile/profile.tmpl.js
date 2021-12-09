@@ -24,17 +24,16 @@ export const profileTemplate = `
             </a>
           </div>
         </div>
-        <div class="profile__profile__info">
-        {{#each inputs}}
-        <div class="profile__profile__info__item">
-          <label>{{this.label}}</label>
-            <input name='{{this.inputName}}' value='{{this.value}}' type='{{this.type}}' />
-          </div>
-        </p>
-      {{/each}}
-          <div>
-            <button class="profile__profile__save-button">Save</button>
-          </div>
+        <form class="profile__profile__info">
+          {{#each inputs}}
+            <div class="profile__profile__info__item">
+              <label>{{this.label}}</label>
+              <input name='{{this.inputName}}' value='{{this.value}}' type='{{this.type}}' />
+            </div>
+          {{/each}}
+        </form>
+        <div>
+          <button type="submit" class="profile__profile__save-button">Save</button>
         </div>
       </div>
     </div>

@@ -1,5 +1,5 @@
 import "./registration.css";
-import Handlebars from 'handlebars/dist/handlebars';
+import Handlebars from "handlebars/dist/handlebars";
 import { registrationTemplate } from "./registration.tmpl";
 
 const data = {
@@ -37,5 +37,6 @@ const data = {
 document.addEventListener('DOMContentLoaded', () => {
     const registrationPage = Handlebars.compile(registrationTemplate);
     const html = registrationPage(data);
-  document.body.innerHTML = html;
+    const app = document.querySelector("#app");
+    app.innerHTML = html;
 })

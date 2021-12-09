@@ -3,7 +3,7 @@ import avatarImage from "../../../static/images/avatar.jpg"
 import sidebarLogoImage from "../../../static/images/logo.png"
 import sidebarBackImage from "../../../static/images/arrow-back.png"
 import avatarImageChange from "../../../static/images/change_avatar.png"
-import Handlebars from 'handlebars/dist/handlebars';
+import Handlebars from "handlebars/dist/handlebars";
 import { profileTemplate } from "./profile.tmpl";
 
 const data = {
@@ -47,5 +47,6 @@ const data = {
 document.addEventListener('DOMContentLoaded', () => {
     const profilePage = Handlebars.compile(profileTemplate);
     const html = profilePage(data);
-  document.body.innerHTML = html;
+    const app = document.querySelector("#app");
+    app.innerHTML = html;
 })

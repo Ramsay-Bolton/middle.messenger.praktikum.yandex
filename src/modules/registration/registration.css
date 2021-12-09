@@ -14,14 +14,12 @@
     border-style: solid;
     border-color: #72726f;
     height: 40px;
-    /* border:none; */
     border-radius: 8px;
 }
 .registration__button {
     background-color: #F9EF12;
     color: #000000;
     height: 40px;
-    /* border:none; */
     border-radius: 8px;
     width: 100px;
 }

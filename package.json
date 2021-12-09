@@ -3,8 +3,8 @@
   "version": "1.0.0",
   "description": "",
   "scripts": {
-    "dev": "./node_modules/.bin/parcel build src/pages/index.html src/pages/404.html src/pages/500.html src/pages/registration.html src/pages/login.html src/pages/profile.html",
-    "build": "./node_modules/.bin/parcel build src/pages/index.html src/pages/404.html src/pages/500.html src/pages/registration.html src/pages/login.html src/pages/profile.html --no-cache",
+    "dev": "./node_modules/.bin/parcel build src/pages/*.html",
+    "build": "./node_modules/.bin/parcel build src/pages/*.html --no-cache",
     "start": "npm run build && node ./server.js",
     "clear-cache": "rm -rf .cache/* dist/*"
   },
