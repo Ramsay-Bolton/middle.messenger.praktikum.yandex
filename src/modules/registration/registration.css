@@ -27,3 +27,21 @@
     color: #000000;
     text-decoration: underline dotted black 2px;
 }
+.registration__form {
+    display: flex;
+    flex-direction: column;
+    padding: 12px 20px 0;
+}
+.registration__form__item {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: baseline;
+    padding: 12px 20px 0px;
+    width: 100%;
+}
+.registration__form__item__button_container {
+    margin: 20px auto;
+    max-width: 50%;
+    padding: 10px;
+}

@@ -14,18 +14,23 @@
     border-style: solid;
     border-color: #72726f;
     height: 40px;
-    /* border:none; */
     border-radius: 8px;
+    display: block;
 }
 .login__button {
     background-color: #F9EF12;
     color: #000000;
     height: 40px;
-    /* border:none; */
     border-radius: 8px;
     width: 100px;
 }
 .login__create-link {
     color: #000000;
     text-decoration: underline dotted black 2px;
+}
+.button-container {
+    margin: 20px auto;
+    max-width: 50%;
+    padding: 10px;
+    text-align: center;
 }
