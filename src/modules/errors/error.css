@@ -1,20 +1,13 @@
-html{
+html {
     box-sizing: border-box;
 }
 *, *::before, *::after{
     box-sizing: inherit;
 }
 
-body{
+body {
     background: linear-gradient(0.25turn, #000000, #ebf8e1, #F9EF12);;
     max-height: 1080px;
-    /* background: linear-gradient(.25turn, red, 10%, blue);; */
-    /* background: radial-gradient(#e66465, #9198e5); */
-    /* background: linear-gradient(217deg, rgba(255,0,0,.8), rgba(255,0,0,0) 70.71%),
-            linear-gradient(127deg, rgba(0,255,0,.8), rgba(0,255,0,0) 70.71%),
-            linear-gradient(336deg, rgba(0,0,255,.8), rgba(0,0,255,0) 70.71%); */
-
-
 }
 .main {
     height: 100%;
