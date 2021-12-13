@@ -2,6 +2,7 @@
   "name": "middle.messenger.praktikum.yandex",
   "version": "1.0.0",
   "description": "",
+  "main": "dist/index.html",
   "scripts": {
     "dev": "./node_modules/.bin/parcel build src/index.html",
     "build": "./node_modules/.bin/parcel build src/index.html --no-cache",
