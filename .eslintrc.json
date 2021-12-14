@@ -1,0 +1,29 @@
+{
+    "extends": [
+        "airbnb",
+        "airbnb-typescript",
+        "plugin:prettier/recommended"
+    ],
+    "parser": "@typescript-eslint/parser",
+    "parserOptions": {
+        "ecmaVersion": 2018,
+        "sourceType": "module",
+        "project": "./tsconfig.json"
+    },
+    "plugins": [
+        "@typescript-eslint"
+    ],
+    "rules": {
+        "max-len": [2, 115],
+        "max-params": [2, 3],
+        "no-console": "off",
+        "class-methods-use-this": "off",
+        "quotes": ["error", "single"],
+        "no-underscore-dangle": "off",
+        "import/no-named-as-default": "off",
+        "object-curly-spacing": ["error", "always"],
+        "array-bracket-spacing": ["error", "never"],
+        "computed-property-spacing": ["error", "never"],
+        "prefer-promise-reject-errors": "off"
+    }
+} 

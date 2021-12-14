@@ -1,9 +1,8 @@
 import Block from '../block';
 import formInputTemplate from './formInput.tmpl';
 
-
 export default class FormItem extends Block {
-	constructor(props: {
+  constructor(props: {
     name: string;
     label: string;
     type: string;
@@ -12,6 +11,6 @@ export default class FormItem extends Block {
     value?: string;
     errorMessage?: string;
   }) {
-		super(formInputTemplate, props);
-	}
+    super(formInputTemplate, props);
+  }
 }

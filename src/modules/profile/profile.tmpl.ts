@@ -13,24 +13,24 @@ export const profileTemplate: string = `
       </div>
     </div>
     <div class="profile__section">
-      <div class="profile__profile">
-        <div class="profile__profile__avatar">
-          <div class="profile__profile__avatar-image">
+      <div class="profile__page">
+        <div class="profile__avatar">
+          <div class="profile__avatar-image">
             <img src='{{avatarImage}}' alt="avatar">
           </div>
-          <div class="profile__profile__avatar-image__change">
+          <div class="profile__avatar-image__change">
             <a href="#">
             <img src='{{avatarImageChange}}'>
             </a>
           </div>
         </div>
-        <form name="profile" method="post" class="profile__profile__info">
+        <form name="profile" method="post" class="profile__info">
           {{#each inputs}}
-            <div class="profile__profile__info__item">
+            <div class="profile__info__item">
               {{{ this }}}
             </div>
           {{/each}}
-          <div class="profile__profile__save-button_container">
+          <div class="profile__save-button_container">
             {{{ button }}}
           </div>
         </form>
@@ -38,4 +38,4 @@ export const profileTemplate: string = `
     </div>
   </div>`;
 
-  export default profileTemplate;
+export default profileTemplate;
