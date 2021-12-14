@@ -1,18 +1,18 @@
 export const registrationTemplate: string = `
-<div class="registration__registration">
+<div class="registration__page">
   <h1>Create Profile</h1>
-  <form name="registration" method="post" class="registration__registration__form">
-    {{#each inputs}}
-      <div class="registration__registration__form__item">
+  <form name="registration" method="post" class="registration__form">
+    {{#each items}}
+      <div class="registration__form__item">
         {{{ this }}}
       </div>
     {{/each}}
-    <div class="registration__registration__form__item__button_container">
+    <div class="registration__form__item__button_container">
       {{{ button }}}
     </div>
   </form>
   <div>
-      <a href="/login" class="registration__registration__signin-link">Sign in</a>
+      <a href="/login" class="registration__signin-link">Sign in</a>
   </div>
 </div>`;
 

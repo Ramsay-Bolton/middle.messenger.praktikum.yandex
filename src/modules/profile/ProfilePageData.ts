@@ -1,6 +1,6 @@
 import IProfileProps from './IProfileProps';
 import { validateOnBlur, clearError } from '../../service/validate';
-import { handleFormSubmit } from '../../utils/handleFormSubmit';
+import handleFormSubmit from '../../utils/handleFormSubmit';
 import FormItem from '../../components/FormInput/formInput';
 import Button from '../../components/Button/button';
 import avatarImage from '../../../static/images/avatar.jpg';
@@ -9,13 +9,12 @@ import sidebarBackImage from '../../../static/images/arrow-back.png';
 import avatarImageChange from '../../../static/images/change_avatar.png';
 
 const profilePageData: IProfileProps = {
-  avatarImage: avatarImage,
-  sidebarLogoImage: sidebarLogoImage,
-  sidebarBackImage: sidebarBackImage,
-  avatarImageChange: avatarImageChange,
+  avatarImage,
+  sidebarLogoImage,
+  sidebarBackImage,
+  avatarImageChange,
   button: new Button({
-    className: 'profile__profile__save-button',
-    id: 'profile_save_button',
+    className: 'profile__save-button',
     type: 'submit',
     text: 'Save',
   }).render(),
@@ -63,11 +62,11 @@ const profilePageData: IProfileProps = {
       size: 40,
     }).render(),
   ],
-    events: {
-      submit: (event: Event) => handleFormSubmit(event, 'profile'),
-      focusout: (event: Event) => validateOnBlur(event),
-      input: (event: Event) => clearError(event),
-    },
-}
+  events: {
+    submit: (event: Event) => handleFormSubmit(event, 'profile'),
+    focusout: (event: Event) => validateOnBlur(event),
+    input: (event: Event) => clearError(event),
+  },
+};
 
 export default profilePageData;

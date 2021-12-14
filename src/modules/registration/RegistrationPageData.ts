@@ -1,17 +1,16 @@
-import IRegistrationProps from './IRegistrationProps';
 import { validateOnBlur, clearError } from '../../service/validate';
-import { handleFormSubmit } from '../../utils/handleFormSubmit';
+import handleFormSubmit from '../../utils/handleFormSubmit';
 import FormItem from '../../components/FormInput/formInput';
 import Button from '../../components/Button/button';
+import IPageProps from '../../interfaces/IPageProps';
 
-const registrationPageData: IRegistrationProps = {
+const registrationPageData: IPageProps = {
   button: new Button({
-    className: 'registration__registration__button',
-    id: 'registration_button',
+    className: 'registration__button',
     type: 'submit',
     text: 'Enter',
   }).render(),
-  inputs: [
+  items: [
     new FormItem({
       name: 'email',
       type: 'text',
@@ -55,11 +54,11 @@ const registrationPageData: IRegistrationProps = {
       size: 40,
     }).render(),
   ],
-    events: {
-      submit: (event: Event) => handleFormSubmit(event, 'registration'),
-      focusout: (event: Event) => validateOnBlur(event),
-      input: (event: Event) => clearError(event),
-    },
-}
+  events: {
+    submit: (event: Event) => handleFormSubmit(event, 'registration'),
+    focusout: (event: Event) => validateOnBlur(event),
+    input: (event: Event) => clearError(event),
+  },
+};
 
 export default registrationPageData;

@@ -1,161 +1,166 @@
-import EventBus from '../service/eventBus';
 import Handlebars from 'handlebars/dist/handlebars';
+import EventBus from '../service/eventBus';
 
 export default class Block {
-	static EVENTS = {
-		INIT: 'init',
-		FLOW_CDM: 'flow:component-did-mount',
-		FLOW_CDU: 'flow:component-did-update',
-		FLOW_RENDER: 'flow:render',
-	};
+  static EVENTS = {
+    INIT: 'init',
+    FLOW_CDM: 'flow:component-did-mount',
+    FLOW_CDU: 'flow:component-did-update',
+    FLOW_RENDER: 'flow:render',
+  };
 
-	_meta: { 
-        template: string; 
-        props: { [key: string]: any } 
+  _meta: {
+    template: string;
+    props: { [key: string]: any };
+  };
+
+  _element: HTMLElement;
+
+  eventBus: () => EventBus;
+
+  props: { [key: string]: any };
+
+  constructor(template: string, props: {} = {}) {
+    const eventBus = new EventBus();
+    this._meta = {
+      template,
+      props,
     };
-	_element: HTMLElement;
 
-	eventBus: () => EventBus;
-	props: { [key: string]: any };
+    this.props = this._makePropsProxy(props);
 
-	constructor(template: string, props: {} = {}) {
-		const eventBus = new EventBus();
-		this._meta = {
-			template,
-			props,
-		};
+    this.eventBus = () => eventBus;
 
-		this.props = this._makePropsProxy(props);
+    this._registerEvents(eventBus);
+    eventBus.emit(Block.EVENTS.INIT);
+  }
 
-		this.eventBus = () => eventBus;
+  _registerEvents(eventBus: EventBus) {
+    eventBus.on(Block.EVENTS.INIT, this.init.bind(this));
+    eventBus.on(Block.EVENTS.FLOW_CDM, this._componentDidMount.bind(this));
+    eventBus.on(Block.EVENTS.FLOW_CDU, this._componentDidUpdate.bind(this));
+    eventBus.on(Block.EVENTS.FLOW_RENDER, this._render.bind(this));
+  }
 
-		this._registerEvents(eventBus);
-		eventBus.emit(Block.EVENTS.INIT);
-	}
+  _createResources() {
+    this._element = this._createDocumentElement('div');
+  }
 
-	_registerEvents(eventBus: EventBus) {
-		eventBus.on(Block.EVENTS.INIT, this.init.bind(this));
-		eventBus.on(Block.EVENTS.FLOW_CDM, this._componentDidMount.bind(this));
-		eventBus.on(Block.EVENTS.FLOW_CDU, this._componentDidUpdate.bind(this));
-		eventBus.on(Block.EVENTS.FLOW_RENDER, this._render.bind(this));
-	}
+  _createDocumentElement(tagName: string) {
+    return document.createElement(tagName);
+  }
 
-	_createResources() {
-		this._element = this._createDocumentElement('div');
-	}
+  init() {
+    this._createResources();
+    this.eventBus().emit(Block.EVENTS.FLOW_CDM);
+  }
 
-	_createDocumentElement(tagName: string) {
-		return document.createElement(tagName);
-	}
+  _componentDidMount() {
+    this.componentDidMount();
+    this.eventBus().emit(Block.EVENTS.FLOW_RENDER);
+  }
 
-	init() {
-		this._createResources();
-		this.eventBus().emit(Block.EVENTS.FLOW_CDM);
-	}
+  componentDidMount() {}
 
-	_componentDidMount() {
-		this.componentDidMount();
-		this.eventBus().emit(Block.EVENTS.FLOW_RENDER);
-	}
+  _componentDidUpdate(
+    oldProps: { [key: string]: any },
+    newProps: { [key: string]: any }
+  ) {
+    const response = this.componentDidUpdate(oldProps, newProps);
+    if (!response) {
+      return;
+    }
 
-	componentDidMount() {}
+    this._render();
+  }
 
-	_componentDidUpdate(
-		oldProps: { [key: string]: any },
-		newProps: { [key: string]: any },
-	) {
-		const response = this.componentDidUpdate(oldProps, newProps);
-		if (!response) {
-			return;
-		}
+  componentDidUpdate(
+    oldProps: { [key: string]: any },
+    newProps: { [key: string]: any }
+  ) {
+    return oldProps !== newProps;
+  }
 
-		this._render();
-	}
+  setProps = (nextProps: { [key: string]: any }) => {
+    if (!nextProps) {
+      return;
+    }
 
-	componentDidUpdate(oldProps: { [key: string]: any }, newProps: { [key: string]: any }) {
-		return oldProps !== newProps;
-	}
+    Object.assign(this.props, nextProps);
+  };
 
-	setProps = (nextProps: { [key: string]: any }) => {
-		if (!nextProps) {
-			return;
-		}
+  get element() {
+    return this._element;
+  }
 
-		Object.assign(this.props, nextProps);
-	};
+  compile(props: object): string {
+    const page = Handlebars.compile(this._meta.template)(props);
+    return page;
+  }
 
-	get element() {
-		return this._element;
-	}
+  _render() {
+    const block: string = this.render();
+    this._removeEvents();
+    this._element.innerHTML = block;
+    this._addEvents();
+  }
 
-	compile(props: object): string {
-	  const page = Handlebars.compile(this._meta.template)(props);
-	  return page;
-	}
+  render(): string {
+    return this.compile(this.props);
+  }
 
-	_render() {
-		const block: string = this.render();
-		this._removeEvents();
-		this._element.innerHTML = block;
-		this._addEvents();
-	}
+  getContent() {
+    return this._element;
+  }
 
-	render(): string {
-		return this.compile(this.props);
-	}
+  _makePropsProxy(props: {}) {
 
-	getContent() {
-		return this._element;
-	}
+    return new Proxy(props, {
+      get: (target: { [key: string]: any }, prop: string) => {
+        if (prop.indexOf('_') === 0) {
+          throw new Error('Forbidden');
+        }
 
-	_makePropsProxy(props: {}) {
-		const self = this;
+        const value = target[prop];
+        return typeof value === 'function' ? value.bind(target) : value;
+      },
+      set: (target: { [key: string]: any[] }, prop: string, value: any) => { 
+        if (prop.indexOf('_') === 0) {
+          throw new Error('Forbidden');
+        }
+      
+        /* eslint-disable-next-line no-param-reassign */
+        target[prop] = value;
+        this.eventBus().emit(Block.EVENTS.FLOW_CDU, { ...target }, target);
+        return true;
+      },
+      deleteProperty() {
+        throw new Error('Forbidden');
+      },
+    });
+  }
 
-		return new Proxy(props, {
-			get(target: { [key: string]: any }, prop: string) {
-				if (prop.indexOf('_') === 0) {
-					throw new Error('Forbidden');
-				}
+  show() {
+    this.getContent().classList.remove('hidden');
+  }
 
-				const value = target[prop];
-				return typeof value === 'function' ? value.bind(target) : value;
-			},
-			set(target: { [key: string]: any[] }, prop: string, value: any) {
-				if (prop.indexOf('_') === 0) {
-					throw new Error('Forbidden');
-				}
+  hide() {
+    this.getContent().classList.add('hidden');
+  }
 
-				target[prop] = value;
-				self.eventBus().emit(Block.EVENTS.FLOW_CDU, {...target}, target);
-				return true;
-			},
-			deleteProperty() {
-				throw new Error('Forbidden');
-			},
-		});
-	}
+  _addEvents() {
+    const { events = {} } = this.props;
 
-	show() {
-		this.getContent().style.display = 'block';
-	}
+    Object.keys(events).forEach((eventName) => {
+      this._element.addEventListener(eventName, events[eventName]);
+    });
+  }
 
-	hide() {
-		this.getContent().style.display = 'none';
-	}
+  _removeEvents() {
+    const { events = {} } = this.props;
 
-	_addEvents() {
-		const {events = {}} = this.props;
-
-		Object.keys(events).forEach(eventName => {
-			this._element.addEventListener(eventName, events[eventName]);
-		});
-	}
-
-	_removeEvents() {
-		const {events = {}} = this.props;
-
-		Object.keys(events).forEach(eventName => {
-			this._element.removeEventListener(eventName, events[eventName]);
-		});
-	}
+    Object.keys(events).forEach((eventName) => {
+      this._element.removeEventListener(eventName, events[eventName]);
+    });
+  }
 }

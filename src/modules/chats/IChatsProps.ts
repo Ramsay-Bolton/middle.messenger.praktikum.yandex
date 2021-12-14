@@ -1,4 +1,4 @@
 export interface IChatsProps {
-    sidebarLogoImage: string;
-    items: string[];
-  }
+  sidebarLogoImage: string;
+  items: string[];
+}
